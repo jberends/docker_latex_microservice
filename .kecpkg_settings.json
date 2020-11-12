@@ -1,0 +1,18 @@
+{
+    "version": "0.0.1",
+    "pyversions": [
+        "2.7",
+        "3.5",
+        "3.6"
+    ],
+    "python_version": "3.5",
+    "venv_dir": "venv",
+    "entrypoint_script": "script",
+    "entrypoint_func": "main",
+    "build_dir": "dist",
+    "requirements_filename": "requirements.txt",
+    "artifacts_filename": "ARTIFACTS",
+    "artifacts_sig_filename": "ARTIFACTS.SIG",
+    "hash_algorithm": "sha256",
+    "package_name": "kems_pdf_generator"
+}

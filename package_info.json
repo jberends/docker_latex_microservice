@@ -1,0 +1,4 @@
+{
+  "entrypoint": "script:main",
+  "requirements_path": "requirements.txt"
+}
