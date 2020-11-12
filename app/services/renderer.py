@@ -1,13 +1,13 @@
 import logging
 import os
-from pathlib import Path
 
 from latex import LatexBuildError
 from latex.jinja2 import make_env
 from jinja2 import FileSystemLoader
 
-from services.pdf_builder import PdfLatexBuilder
-from services.utils import filter_ellipsis_on_longtext, filter_no_newline, filter_squash_whitespace
+from config import PDFLATEX_PATH, DEBUG_LOG_RENDERED_TEX
+from .pdf_builder import PdfLatexBuilder
+from .utils import filter_ellipsis_on_longtext, filter_no_newline, filter_squash_whitespace
 
 __latex_env = None
 
@@ -15,8 +15,7 @@ __latex_env = None
 LATEX_TEMPLATE_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, "templates")
 )
-PDF_PDFLATEX_PATH = Path('/usr/bin/lualatex')
-PDF_DEBUG_LOG_RENDERED_TEX = False
+
 
 def get_latex_env():
     """Latex rendering environment singleton."""
@@ -44,7 +43,7 @@ def render_latex_to_pdf(context, template_filename="main.tex", return_tex=False)
     rendered_pdf = None
 
     # instantiate the pdf builder (in production we use texlive distrbution from CTAN, local dev is from ubuntu)
-    pdf_builder = PdfLatexBuilder(pdflatex=PDF_PDFLATEX_PATH)
+    pdf_builder = PdfLatexBuilder(pdflatex=PDFLATEX_PATH)
 
     try:
         rendered_pdf = pdf_builder.build_pdf(rendered_template)
@@ -56,7 +55,7 @@ def render_latex_to_pdf(context, template_filename="main.tex", return_tex=False)
             )
         )
 
-    if PDF_DEBUG_LOG_RENDERED_TEX:
+    if DEBUG_LOG_RENDERED_TEX:
         logging.error(
             "TEX FILE: \n------------------\n{}\n------------------".format(
                 rendered_template
