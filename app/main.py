@@ -1,26 +1,30 @@
 #!/usr/bin/env python
+
 """
-This script is part of package `kems_pdf_generator`"""
+
+inspiration
+
+* https://github.com/eightBEC/fastapi-ml-skeleton/tree/master/fastapi_skeleton (APACHE 2.0)
+"""
+
+
 from fastapi import FastAPI
 
+from routers import heartbeat
 from __about__ import __version__
-from common import APP_NAME, API_PREFIX
-
-
-def APP_VERSION(args):
-    pass
+from config import APP_NAME, API_PREFIX, DEBUG
 
 
 def get_app() -> FastAPI:
     fast_app = FastAPI(title=APP_NAME, version=__version__, debug=DEBUG)
-    fast_app.include_router(api_router, prefix=API_PREFIX)
 
-    fast_app.add_event_handler("startup", start_app_handler(fast_app))
-    fast_app.add_event_handler("shutdown", stop_app_handler(fast_app))
+    fast_app.include_router(heartbeat.router, prefix=API_PREFIX)
 
     return fast_app
 
+
 app = get_app()
+
 
 #
 # from fastapi import FastAPI

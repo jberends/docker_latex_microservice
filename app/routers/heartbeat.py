@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 router = APIRouter()
 
+
 class HearbeatResult(BaseModel):
     is_alive: bool
 

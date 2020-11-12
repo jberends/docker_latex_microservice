@@ -1,4 +1,4 @@
-### gitignore template provided by kecpkg-tools
+### gitignore template
 
 ### Python template
 # Byte-compiled / optimized / DLL files
@@ -64,6 +64,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+!.env.template
 
 # mypy
 .mypy_cache/
