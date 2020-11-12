@@ -10,3 +10,10 @@ fastapi
 starlette
 uvicorn
 pydantic
+
+# latex pdf builder
+data
+latex
+shutilwhich
+tempdir
+jinja2

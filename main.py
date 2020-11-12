@@ -9,11 +9,16 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.get("/version")
+@app.get("/api/version")
 async def version():
     """Version of the application."""
     return dict(version=__version__)
 
+
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return dict(
+        message="latex_docker_microservice",
+        docs=f"https://localhost:8000{app.docs_url}",
+        redoc=f"https://localhost:8000{app.redoc_url}"
+    )
