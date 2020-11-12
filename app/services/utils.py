@@ -2,7 +2,7 @@ import re
 
 
 def calculate_table_width(
-        property_models, first_column_width, column_width=4, extra_width_margin=0
+    property_models, first_column_width, column_width=4, extra_width_margin=0
 ):
     """
     Calculate the table width based on the amount of properties, and thus columns, the table will have
@@ -14,7 +14,7 @@ def calculate_table_width(
     :return:
     """
     return (
-            extra_width_margin + (len(property_models)) * column_width + first_column_width
+        extra_width_margin + (len(property_models)) * column_width + first_column_width
     )
 
 
