@@ -17,3 +17,6 @@ latex
 shutilwhich
 tempdir
 jinja2
+
+# dev
+pre-commit

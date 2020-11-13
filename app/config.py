@@ -1,22 +1,20 @@
 from pathlib import Path
 
-from starlette.config import Config
+from pydantic import BaseSettings
 from starlette.datastructures import Secret
 
-# TODO: refactor according to https://fastapi.tiangolo.com/advanced/settings/?h=+config
+
+class Settings(BaseSettings):
+    APP_NAME: str = "Latex docker microservice"
+    API_PREFIX: str = "/api"
+    API_KEY: Secret = None
+    DEBUG: bool = True
+
+    PDFLATEX_PATH: Path = Path("/usr/bin/lualatex")
+    DEBUG_LOG_RENDERED_TEX: bool = False
+
+    class Config:
+        env_file = ".env"
 
 
-APP_NAME = "Latex docker microservice"
-API_PREFIX = "/api"
-
-config = Config("../.env")
-
-API_KEY: Secret = config("API_KEY", cast=Secret)
-DEBUG: bool = config("DEBUG", cast=bool, default=False)
-
-PDFLATEX_PATH: Path = config(
-    "PDFLATEX_PATH", cast=Path, default=Path("/usr/bin/lualatex")
-)
-DEBUG_LOG_RENDERED_TEX: bool = config(
-    "DEBUG_LOG_REDENRED_TEX", cast=bool, default=False
-)
+settings = Settings()

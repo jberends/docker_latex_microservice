@@ -4,21 +4,25 @@
 
 inspiration
 
-* https://github.com/eightBEC/fastapi-ml-skeleton/tree/master/fastapi_skeleton (APACHE 2.0)
+* https://github.com/eightBEC/fastapi-ml-skeleton/tree/master/fastapi_skeleton
+(APACHE 2.0)
 """
 
 
 from fastapi import FastAPI
 
-from routers import heartbeat
+from routers import heartbeat, versions
 from __about__ import __version__
-from config import APP_NAME, API_PREFIX, DEBUG
+from config import settings
 
 
 def get_app() -> FastAPI:
-    fast_app = FastAPI(title=APP_NAME, version=__version__, debug=DEBUG)
+    fast_app = FastAPI(
+        title=settings.APP_NAME, version=__version__, debug=settings.DEBUG
+    )
 
-    fast_app.include_router(heartbeat.router, prefix=API_PREFIX)
+    fast_app.include_router(heartbeat.router, prefix=settings.API_PREFIX)
+    fast_app.include_router(versions.router, prefix=settings.API_PREFIX)
 
     return fast_app
 
