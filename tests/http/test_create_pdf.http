@@ -1,4 +1,5 @@
-POST http://127.0.0.1:8888/api/pdf
+### Multipart form with only tex (unicode)
+POST {{host}}/api/pdf
 Content-Type: multipart/form-data; boundary=boundary
 
 --boundary
@@ -8,9 +9,14 @@ Content-Type: text/plain
 Some Information that should be a latex file </> \\ 👍🏼  " '
 --boundary
 
+> {%
+client.test("success", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
 
-### With a file
-POST http://127.0.0.1:8888/api/pdf
+### Multipart form with multiple media files.
+POST {{host}}/api/pdf
 Content-Type: multipart/form-data; boundary=boundary
 
 --boundary
@@ -30,9 +36,20 @@ Content-Type: application/pdf
 < ../assets/lorum_ipsum.pdf
 --boundary
 
+> {%
+client.test("success", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
 
-###
-POST http://127.0.0.1:8888/api/pdf
+### JSON test (will fail) 422
+POST {{host}}/api/pdf
 Content-Type: application/json
 
 {"tex": "goo bar"}
+
+> {%
+client.test("success", function() {
+  client.assert(response.status === 422, "Response status is not 422");
+});
+%}
