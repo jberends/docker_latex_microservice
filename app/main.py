@@ -1,52 +1,26 @@
-#!/usr/bin/env python
-
-"""
-
-inspiration
-
-* https://github.com/eightBEC/fastapi-ml-skeleton/tree/master/fastapi_skeleton
-(APACHE 2.0)
-"""
+import sys
 
 
-from fastapi import FastAPI
+from starlette.datastructures import Secret
 
-from routers import heartbeat, versions
-from __about__ import __version__
-from config import settings
+from app.application import app
+from app.routers import heartbeat, versions
+from app.settings.globals import SENTRY_DSN, API_PREFIX
 
+sys.path.extend(["./"])
 
-def get_app() -> FastAPI:
-    fast_app = FastAPI(
-        title=settings.APP_NAME, version=__version__, debug=settings.DEBUG
-    )
+ROUTERS = (heartbeat.router, versions.router)
 
-    fast_app.include_router(heartbeat.router, prefix=settings.API_PREFIX)
-    fast_app.include_router(versions.router, prefix=settings.API_PREFIX)
+for r in ROUTERS:
+    app.include_router(r, prefix=API_PREFIX)
 
-    return fast_app
+if isinstance(SENTRY_DSN, Secret) and SENTRY_DSN.__str__() not in ("None", ""):
+    from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
-
-app = get_app()
+    app.add_middleware(SentryAsgiMiddleware)
 
 
-#
-# from fastapi import FastAPI
-#
-# app = FastAPI()
-#
-#
-# @app.get("/api/version")
-# async def version():
-#     """Version of the application."""
-#     return dict(version=__version__)
-#
-#
-# @app.get("/")
-# async def root():
-#     return dict(
-#         message="latex_docker_microservice",
-#         docs=f"http://localhost:8000{app.docs_url}",
-#         redoc=f"http://localhost:8000{app.redoc_url}",
-#         version=__version__
-#     )
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=8888, log_level="info")

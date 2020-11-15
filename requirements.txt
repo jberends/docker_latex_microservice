@@ -11,6 +11,9 @@ starlette
 uvicorn
 pydantic
 
+# sentry
+sentry-sdk
+
 # latex pdf builder
 data
 latex
