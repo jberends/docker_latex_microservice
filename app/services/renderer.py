@@ -1,17 +1,17 @@
 import logging
 import os
 
+from jinja2 import FileSystemLoader
 from latex import LatexBuildError
 from latex.jinja2 import make_env
-from jinja2 import FileSystemLoader
 
-from config import PDFLATEX_PATH, DEBUG_LOG_RENDERED_TEX
 from .pdf_builder import PdfLatexBuilder
 from .utils import (
     filter_ellipsis_on_longtext,
     filter_no_newline,
     filter_squash_whitespace,
 )
+from ..settings.globals import PDFLATEX_PATH, DEBUG_LOG_RENDERED_TEX
 
 __latex_env = None
 

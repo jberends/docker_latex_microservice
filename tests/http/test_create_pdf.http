@@ -1,0 +1,38 @@
+POST http://127.0.0.1:8888/api/pdf
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="tex"
+Content-Type: text/plain
+
+Some Information that should be a latex file </> \\ 👍🏼  " '
+--boundary
+
+
+### With a file
+POST http://127.0.0.1:8888/api/pdf
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="tex"
+Content-Type: text/plain
+
+Some Information that should be a latex file </> \\ 👍🏼  " '
+--boundary
+Content-Disposition: form-data; name="media"; filename="some.pdf"
+Content-Type: application/pdf
+
+< ../assets/30m_4 sails and spars.pdf
+--boundary
+Content-Disposition: form-data; name="media"; filename="another.pdf"
+Content-Type: application/pdf
+
+< ../assets/30m_4 sails and spars.pdf
+--boundary
+
+
+###
+POST http://127.0.0.1:8888/api/pdf
+Content-Type: application/json
+
+{"tex": "goo bar"}

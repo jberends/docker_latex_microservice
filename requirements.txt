@@ -11,6 +11,9 @@ starlette
 uvicorn
 pydantic
 
+# nultipart form support
+python-multipart
+
 # sentry
 sentry-sdk
 
