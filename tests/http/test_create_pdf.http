@@ -22,12 +22,12 @@ Some Information that should be a latex file </> \\ 👍🏼  " '
 Content-Disposition: form-data; name="media"; filename="some.pdf"
 Content-Type: application/pdf
 
-< ../assets/30m_4 sails and spars.pdf
+< ../assets/lorum_ipsum.pdf
 --boundary
 Content-Disposition: form-data; name="media"; filename="another.pdf"
 Content-Type: application/pdf
 
-< ../assets/30m_4 sails and spars.pdf
+< ../assets/lorum_ipsum.pdf
 --boundary
 
 
