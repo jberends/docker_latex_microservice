@@ -51,7 +51,7 @@ class PdfExecutionHandler(object):
 
     def pre_process(self):
         """
-        Pre processes the workspace
+        Pre processes the workspace.
 
         - put all the media in the workspace.
         """
@@ -65,7 +65,7 @@ class PdfExecutionHandler(object):
 
     def build(self):
         """
-        Perform the actual build
+        Perform the actual build.
         """
 
         try:
@@ -81,7 +81,7 @@ class PdfExecutionHandler(object):
 
     def post_process(self):
         """
-        Post Process the exeution
+        Post Process the execution.
 
         - clean out all temp dirs
         """

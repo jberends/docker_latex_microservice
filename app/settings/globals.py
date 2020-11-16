@@ -34,7 +34,7 @@ PDFLATEX_PATH: Path = config(
     "PDFLATEX_PATH", cast=Path, default=Path("/usr/bin/lualatex")
 )
 DEBUG_LOG_RENDERED_TEX: bool = config(
-    "DEBUG_LOG_RENDERED_TEX", cast=bool, default=True)
+    "DEBUG_LOG_RENDERED_TEX", cast=bool, default=DEBUG)
 PDF_WORKSPACE_BASE: Path = config(
     "PDF_WORKSPACE_BASE", cast=Path, default=APP_ROOT / 'workspace'
 )

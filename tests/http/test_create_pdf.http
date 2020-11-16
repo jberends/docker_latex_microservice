@@ -55,9 +55,10 @@ client.test("success", function() {
 %}
 
 
-### Actual PDF call
+### curl -F 'tex=@tests/assets/test.tex' http://localhost:8888/api/pdf
 POST {{host}}/api/pdf
 Content-Type: multipart/form-data; boundary=boundary
+Accept: application/pdf
 
 --boundary
 Content-Disposition: form-data; name="tex"

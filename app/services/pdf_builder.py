@@ -13,6 +13,7 @@ License: MIT
 import os
 import subprocess
 from tempfile import TemporaryDirectory
+from typing import Text, Optional
 
 from data import Data as I
 from data.decorators import data
@@ -20,7 +21,6 @@ from future.utils import raise_from
 from latex.build import LatexBuilder
 from latex.exc import LatexBuildError
 from shutilwhich import which
-from typing import Text, Optional
 
 
 class PdfLatexBuilder(LatexBuilder):
@@ -40,10 +40,10 @@ class PdfLatexBuilder(LatexBuilder):
     """
 
     def __init__(
-            self,
-            pdflatex: Text = "pdflatex",
-            tempdir: Optional[TemporaryDirectory] = None,
-            max_runs: int = 15,
+        self,
+        pdflatex: Text = "pdflatex",
+        tempdir: Optional[TemporaryDirectory] = None,
+        max_runs: int = 15,
     ):
         self.pdflatex = pdflatex
         self.max_runs = max_runs
@@ -55,7 +55,9 @@ class PdfLatexBuilder(LatexBuilder):
 
     @data("source")
     def build_pdf(self, source, texinputs=[]):
-        with self.tempdir as tmpdir, source.temp_saved(suffix=".latex", dir=tmpdir) as tmp:
+        with self.tempdir as tmpdir, source.temp_saved(
+            suffix=".latex", dir=tmpdir
+        ) as tmp:
 
             # close temp file, so other processes can access it also on Windows
             tmp.close()
@@ -83,7 +85,7 @@ class PdfLatexBuilder(LatexBuilder):
             while runs_left:
                 # try:
                 with open(os.devnull, "r") as devnull_r_fd, open(
-                        os.devnull, "w"
+                    os.devnull, "w"
                 ) as devnull_w_fd:
                     execution_result = subprocess.run(
                         args,

@@ -1,8 +1,10 @@
-from fastapi import APIRouter, UploadFile, Form
-from fastapi.responses import StreamingResponse
-from typing import List, Optional, Dict, Union
+from typing import List, Optional, Dict, Union, Text
 
-from app.services.execution_handler import PdfExecutionHandler
+from fastapi import APIRouter, Form, UploadFile
+from fastapi.responses import StreamingResponse
+from starlette.datastructures import UploadFile as StarletteUploadFile
+
+from app.services.pdf_execution_handler import PdfExecutionHandler
 
 router = APIRouter()
 
@@ -10,14 +12,22 @@ router = APIRouter()
 @router.post("/pdf", name="pdf")
 # async def pdf_create(body: PDFCreateIn, files: Optional[List[UploadFile]]=[File(...)]) -> StreamingResponse:
 async def create_pdf(
-    tex: str = Form(...), media: Optional[List[UploadFile]] = list()
+    tex: Union[Text, UploadFile] = Form(...), media: Optional[List[UploadFile]] = list()
 ) -> Union[Dict, StreamingResponse]:
     """
     Create a PDF.
     """
+    if isinstance(tex, StarletteUploadFile) and tex.content_type in (
+        "text/plain",
+        "application/octet-stream",
+    ):
+        content = await tex.read()
+        await tex.close()
+        tex = content
+
     pdf = PdfExecutionHandler(tex=tex, media=media).execute()
     if pdf:
-        return StreamingResponse(content=pdf, media_type="application/pdf")
+        return StreamingResponse(content=pdf.stream, media_type="application/pdf")
 
     response = dict(incoming_tex=tex)
     if media:
