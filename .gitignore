@@ -108,3 +108,7 @@ pip-selfcheck.json
 
 # GnuPG
 *.asc
+
+
+workspace/*/
+!workspace/.gitkeep
