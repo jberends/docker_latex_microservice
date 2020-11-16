@@ -53,3 +53,15 @@ client.test("success", function() {
   client.assert(response.status === 422, "Response status is not 422");
 });
 %}
+
+
+### Actual PDF call
+POST {{host}}/api/pdf
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="tex"
+Content-Type: text/plain
+
+< ../assets/test.tex
+--boundary

@@ -1,6 +1,7 @@
-from ..__about__ import __version__
 from fastapi import APIRouter
 from pydantic import BaseModel
+
+from ..settings.globals import APP_VERSION
 
 router = APIRouter()
 
@@ -14,4 +15,4 @@ def get_version() -> VersionResult:
     """
     Version of the application.
     """
-    return VersionResult(version=__version__)
+    return VersionResult(version=APP_VERSION)

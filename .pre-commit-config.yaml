@@ -38,7 +38,7 @@ repos:
     hooks:
     -   id: flake8
         args:
-        - --ignore=F821,E501
+        - --ignore=F821,E501,F841,E741
         files: app/.*
 #-   repo: https://github.com/ambv/black
 #    rev: 20.8b1
