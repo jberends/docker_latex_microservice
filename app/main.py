@@ -2,11 +2,9 @@ import sys
 
 from starlette.datastructures import Secret
 
-from app.application import app
-from app.routers import heartbeat, versions, pdf
-from app.settings.globals import SENTRY_DSN, API_PREFIX
-
-sys.path.extend(["./"])
+from application import app
+from routers import heartbeat, versions, pdf
+from settings.globals import SENTRY_DSN, API_PREFIX
 
 ROUTERS = (heartbeat.router, versions.router, pdf.router)
 

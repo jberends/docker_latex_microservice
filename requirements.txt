@@ -7,12 +7,16 @@ pykechain
 
 # additional requirements below
 fastapi
-starlette
+starlette==0.13.6
 uvicorn
 pydantic
 
 # nultipart form support
 python-multipart
+ujson
+pyyaml
+requests
+aiofiles
 
 # sentry
 sentry-sdk

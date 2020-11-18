@@ -7,8 +7,8 @@ from fastapi import UploadFile
 from latex import LatexBuildError
 from typing import List, Optional, Text, Iterator
 
-from app.services.pdf_builder import PdfLatexBuilder
-from app.settings.globals import PDFLATEX_PATH, DEBUG_LOG_RENDERED_TEX, PDF_WORKSPACE_BASE
+from services.pdf_builder import PdfLatexBuilder
+from settings.globals import PDFLATEX_PATH, DEBUG_LOG_RENDERED_TEX, PDF_WORKSPACE_BASE
 
 
 class PdfExecutionHandler(object):

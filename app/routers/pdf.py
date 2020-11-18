@@ -4,7 +4,7 @@ from fastapi import APIRouter, Form, UploadFile
 from fastapi.responses import StreamingResponse
 from starlette.datastructures import UploadFile as StarletteUploadFile
 
-from app.services.pdf_execution_handler import PdfExecutionHandler
+from services.pdf_execution_handler import PdfExecutionHandler
 
 router = APIRouter()
 

@@ -14,7 +14,7 @@ inspiration
 from fastapi import FastAPI
 from starlette.datastructures import Secret
 
-from app.settings.globals import SENTRY_DSN, APP_NAME, APP_VERSION, DEBUG
+from settings.globals import SENTRY_DSN, APP_NAME, APP_VERSION, DEBUG
 
 if isinstance(SENTRY_DSN, Secret) and SENTRY_DSN.__str__() not in ("None", ""):
     from sentry_sdk import initialize_sentry

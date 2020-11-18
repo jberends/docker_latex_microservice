@@ -4,9 +4,9 @@ from starlette.config import Config
 from starlette.datastructures import Secret
 from typing import Optional
 
-from app.__about__ import __version__
+from __about__ import __version__
 
-package_root: Path = Path(__file__).parents[2] / ".env"
+package_root: Path = Path(__file__).parent.parent / ".env"
 config: Config = Config(package_root if package_root.exists() else None)
 
 APP_NAME: str = "Latex docker microservice"
