@@ -9,6 +9,7 @@ services:
     container_name: app
     volumes:
       - ./app:/app
+      - ./workspace:/workspace
     ports:
       - "8888:80"
     env_file:

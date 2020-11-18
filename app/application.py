@@ -14,19 +14,15 @@ inspiration
 from fastapi import FastAPI
 from starlette.datastructures import Secret
 
-from settings.globals import SENTRY_DSN, APP_NAME, APP_VERSION, DEBUG
+from settings.globals import SENTRY_DSN, APP_NAME, APP_VERSION, DEBUG, SENTRY_ENABLED
 
-if isinstance(SENTRY_DSN, Secret) and SENTRY_DSN.__str__() not in ("None", ""):
-    from sentry_sdk import initialize_sentry
-
-    initialize_sentry(dsn=SENTRY_DSN.__str__(), integrations=[])
+if SENTRY_ENABLED and isinstance(SENTRY_DSN, Secret) and SENTRY_DSN.__str__() not in ("None", ""):
+    import sentry_sdk
+    sentry_sdk.init(dsn=str(SENTRY_DSN))
 
 
 def get_app() -> FastAPI:
     fast_app = FastAPI(title=APP_NAME, version=APP_VERSION, debug=DEBUG)
-
-    # fast_app.include_router(heartbeat.router, prefix=settings.API_PREFIX)
-    # fast_app.include_router(versions.router, prefix=settings.API_PREFIX)
 
     return fast_app
 

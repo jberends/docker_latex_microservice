@@ -27,6 +27,7 @@ API_AUTHORIZATION_HEADER: str = config(
 DEBUG: bool = config("DEBUG", cast=bool, default=True)
 
 # Sentry error logging
+SENTRY_ENABLED: bool = config("SENTRY_ENABLED", cast=bool, default=False)
 SENTRY_DSN: Optional[Secret] = config("SENTRY_DSN", cast=Secret, default=None)
 
 # PDF latex settings
@@ -43,6 +44,7 @@ PDF_WORKSPACE_BASE: Path = config(
 print(f"""
 {PDFLATEX_PATH=}
 {DEBUG=}
+{SENTRY_ENABLED=}
 {SENTRY_DSN=}
 {PDF_WORKSPACE_BASE=}
 """)
